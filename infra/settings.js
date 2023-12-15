@@ -11,6 +11,43 @@ const sequelize = new Sequelize({
   password: process.env.MYSQL_PASSWORD,
 });
 
+
+const Product = sequelize.define('produto', {
+  idproduto: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  nome: {
+    type: DataTypes.STRING(25),
+    allowNull: false,
+  },
+  quantidade: {
+    type: DataTypes.INTEGER,
+  },
+  preco: {
+    type: DataTypes.DECIMAL(10,2),
+    allowNull: false,
+    unique: true,
+  },
+  desconto: {
+    type: DataTypes.DECIMAL(3,2),
+    allowNull: false,
+  },
+  categoria: {
+    type: DataTypes.STRING(15),
+    allowNull: false,
+  },
+  descricao: {
+    type: DataTypes.STRING(30),
+    allowNull: false,
+  }
+}, {
+  tableName: 'produto',
+  timestamps: false,
+});
+
 const User = sequelize.define('cliente', {
   idCliente: {
     type: DataTypes.INTEGER,
@@ -43,9 +80,9 @@ const User = sequelize.define('cliente', {
     allowNull: false,
   }
 }, {
-  tableName: 'cliente',
+  tableName: 'produto',
   timestamps: false,
 });
 
-module.exports = {User};
+module.exports = {User,Product};
 
